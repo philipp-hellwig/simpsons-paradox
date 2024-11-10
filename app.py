@@ -36,7 +36,7 @@ with tab1:
     st.pyplot(fig1)
 
     
-    st.markdown(f"**Exercise:** If we assume that the death rates split by age and vaccination status are true, we can see what happens when we vary the sample size for each condition.  \nExplore how the sample sizes for each condition affect the aggregated death rates.  \nWhen does the death rate become larger for the unvaccinated people than for vaccinated people when the data is aggregated?")
+    st.markdown(f"**Exercise:** If we assume that the death rates split by age and vaccination status are the true population values and we do not have any measurement error, we can see what happens when we vary the sample size for each condition.  \nExplore how the sample sizes for each condition affect the aggregated death rates.  \nWhen does the death rate become larger for the unvaccinated people than for vaccinated people when the data is aggregated?")
     st.header("Set Sample Sizes:")
 
     n_younger_uv = st.slider("under 50 and unvaccinated", min_value=10, max_value=150_000, value=147612)
