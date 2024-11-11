@@ -1,0 +1,66 @@
+---
+title: "Simpson's paradox Covid"
+author: "Philipp Hellwig"
+date: "`r Sys.Date()`"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readr)
+```
+
+## Data Import
+
+This data set was collected from Covid-19 cases in the UK. More details here: <https://www.openintro.org/data/index.php?data=simpsons_paradox_covid>
+
+```{r}
+covid <- read_csv("simpsons_paradox_covid.csv")
+```
+
+## Total Aggregates
+
+```{r}
+total_counts = table(covid[,c(2,3)])
+total_counts 
+```
+
+```{r}
+death_rate_total = round(total_counts[,1]/total_counts[,2],4)
+death_rate_total
+```
+
+Surprising, death rate is higher for vaccinated people than for unvaccinated people! Is the vaccine a hoax after all??
+
+```{r}
+# double checking results
+253/150799 # should round to 0.002
+```
+
+## Grouping by Age Bracket
+
+```{r}
+by_age = table(covid)
+by_age
+```
+
+```{r}
+death_prop_by_age = round(by_age[,,1]/by_age[,,2],4)
+death_prop_by_age
+```
+
+```{r}
+# double checking results
+205/3235 # should round to 0.0634
+```
+
+### Why?
+
+Uneven sample sizes! Way more high risk cases (people 50+) that are vaccinated compared to unvaccinated:
+
+```{r}
+# demonstration sampling rate
+by_age[,,1] + by_age[,,2]
+```
